@@ -1,6 +1,7 @@
 <div class="search">
-  <input id="search-text" type="text" placeholder="#"/>  
+  <input id="search-text" type="text" placeholder=" search story #..."/>  
 </div>
 <div class="search-response">
-	
-</div>
+	<div class="search-rows">
+	</div>	
+</div>>

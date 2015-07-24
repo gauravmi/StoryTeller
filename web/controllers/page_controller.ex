@@ -21,8 +21,8 @@ defmodule StoryTeller.PageController do
     render conn, "index.html"
   end
 
-  def search(data, search)
-
+  def search(data, search) do
+    data
   end
 
   def commits(conn, _params) do    

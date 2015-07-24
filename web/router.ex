@@ -16,6 +16,7 @@ defmodule StoryTeller.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/commits", PageController, :commits
   end
 
   # Other scopes may use custom stacks.

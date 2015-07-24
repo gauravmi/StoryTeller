@@ -1,3 +1,6 @@
+# d012ecb85e89b6de8e170ca915a6b58f213a8e93
+# response = HTTPotion.get "https://api.github.com/meta", [{access_token: "d012ecb85e89b6de8e170ca915a6b58f213a8e93"}, "User-Agent": "storyTeller"]
+
 defmodule StoryTeller.Mixfile do
   use Mix.Project
 
@@ -18,7 +21,7 @@ defmodule StoryTeller.Mixfile do
   def application do
     [mod: {StoryTeller, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :httpotion, :hackney]]
   end
 
   # Specifies which paths to compile per environment
@@ -29,11 +32,17 @@ defmodule StoryTeller.Mixfile do
   #
   # Type `mix help deps` for examples and options
   defp deps do
-    [{:phoenix, "~> 0.14"},
+    [
+     {:phoenix, "~> 0.14"},
      {:phoenix_ecto, "~> 0.5"},
      {:postgrex, ">= 0.0.0"},
      {:phoenix_html, "~> 1.1"},
      {:phoenix_live_reload, "~> 0.4", only: :dev},
-     {:cowboy, "~> 1.0"}]
+     {:cowboy, "~> 1.0"},
+     {:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.1"},
+     {:httpotion, "~> 2.1.0"},
+     {:hackney, github: "benoitc/hackney", branch: "master"},
+     {:exjsx, "~> 3.2.0"}
+   ]
   end
 end

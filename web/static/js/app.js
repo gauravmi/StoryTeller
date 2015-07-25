@@ -1,67 +1,65 @@
-// import {Socket} from "phoenix"
-
-// let socket = new Socket("/ws")
-// socket.connect()
-// let chan = socket.chan("topic:subtopic", {})
-// chan.join().receive("ok", chan => {
-//   console.log("Success!")
-// })
+import {Socket} from "phoenix"
 
 
 class App {
-  static init(){
-  	var self = this;
-  	$("#search-text").keypress(function(e){
-  		if (e.which == 13) {
-  			console.log("sdf");
-  			self.requestCommits($(event.target).val());
-  		}
-  	})
+  static init(){    
+    this.searchContainer = $(".search-container");
+    this.searchSection = $(".search-rows");
+    this.inputSearch = $("#search-text");
+    this.contributorSection = $(".contrib-section");
+    this.observe(this.inputSearch);
   }
-  static unique(value, index. self){
+
+  static observe(input){
+    var self = this;
+    input.keypress(function(e){
+      if (e.which == 13) {        
+        self.requestCommits($(event.target).val());
+      }
+    })
+  }
+
+  static templateRow(){
+    return (function(gitLog){
+      return $("<div class='row'> \
+        <div class='message'>"+ gitLog.commit.message +"</div> \
+        <span class='commit'>"+ gitLog.sha.substring(0,8) +"</span> \
+        <span class='author'>"+ gitLog.commit.author.name +"</span> \
+        <span class='date'>"+ gitLog.commit.author.date +"</span> \
+        <span class='url'></span> \
+      </div>")
+    });
+  }
+
+  static templateContributer(){
+    return (function(contributer){
+      return $("<div class='contrib'>"+ contributer +"</div>")
+    }); 
+  }
+
+  static unique(value, index, self){
     return self.indexOf(value) === index;
   }
 
   static display(data){
-    data = JSON.parse(data);
-    var contributers = []
-    for(var i=0; i< data.length; i++){
-      contributers.push(data[i].commit.author.name)
-      var row = $("<div class='row'></div>")
-      var message = $("<div class='message'></div>")
-      var date = $("<span class='date'></span>")
-      var commit = $("<span class='commit'></span>")
-      var author = $("<span class='author'></span>")
-      var date = $("<span class='date'></span>")
-      var url = $("<span class='url'></span>")
-      commit.text(data[i].sha);
-      date.text(data[i].commit.author.date);
-      author.text(data[i].commit.author.name);
-      message.text(data[i].commit.message);
-      url.text(data[i].url);
-      row.append(author);
-      row.append(message);
-      row.append(date);
-      row.append(commit);
-      $(".search-rows").append(row);
+    var searchData = JSON.parse(data);
+    var contributers = [];
+    for(var row of searchData){
+      contributers.push(row.commit.author.name);
+      var rowHtml = this.templateRow()(row);      
+      this.searchSection.append(rowHtml);
     }
-    var contributorSection = $("<div class='contrib-section'></div>")
-    var cont = $("<span class='contribtitle'></span>")
-    cont.text("Contributers...");
-    contributorSection.append(cont);
-    debugger;
     contributers = contributers.filter(this.unique);
-    for(var i=0;i< contributers.length; i++){
-      var contributor = $("<div class='contrib'></div>");
-      contributor.text(contributers[i]);
-      contributorSection.append(contributor);
+    for(var contributor of contributers){
+      var contributor = this.templateContributer()(contributor);
+      this.contributorSection.show();
+      this.contributorSection.append(contributor);
     }
-    $(".search-response").append(contributorSection);
   }
 
   static requestCommits(search_text){
     var self = this;
-  	$.ajax('/commits?q='+search_text, {
+  	$.ajax('/commits?q='+ search_text, {
   		method: 'get'
   	}).done(function(data){
       self.display(data);
@@ -70,7 +68,5 @@ class App {
 }
 
 $( () => App.init() )
-
-
 
 export default App

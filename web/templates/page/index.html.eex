@@ -1,7 +1,9 @@
 <div class="search">
   <input id="search-text" type="text" placeholder=" search story #..."/>  
 </div>
-<div class="search-response">
-	<div class="search-rows">
-	</div>	
+<div class="search-container">
+	<div class="search-rows"> </div>
+	<div class="contrib-section" style="display:none">
+		<span class='title'>Contributers</span>
+	</div>
 </div>>

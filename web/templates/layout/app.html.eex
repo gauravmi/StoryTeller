@@ -20,9 +20,10 @@
       <%= @inner %>
 
     </div> <!-- /container -->
+    <script src="<%= static_path(@conn, "/js/render_template.js") %>"></script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
     
-    <script>require("web/static/js/app")</script>
+    <script>require("web/static/js/app")</script>    
     
   </body>
 </html>

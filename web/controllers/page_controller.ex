@@ -22,13 +22,14 @@ defmodule StoryTeller.PageController do
   end
 
   def search(data, search) do
-    data
+
   end
 
   def commits(conn, _params) do    
-    response = GitHub.get("repos/gauravmi/StoryTeller/commits")
-    commits = search(response.body, _params["q"])
-    json conn, commits
+    responseJSON = Poison.Parser.parse!(GitHub.get("repos/gauravmi/StoryTeller/commits").body)
+    
+    conn
+       |> put_status(201)
+       |> json responseJSON
   end
-
 end

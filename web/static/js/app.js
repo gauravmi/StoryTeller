@@ -42,9 +42,8 @@ class App {
   }
 
   static display(data){
-    var searchData = JSON.parse(data);
     var contributers = [];
-    for(var row of searchData){
+    for(var row of data){
       contributers.push(row.commit.author.name);
       var rowHtml = this.templateRow()(row);      
       this.searchSection.append(rowHtml);

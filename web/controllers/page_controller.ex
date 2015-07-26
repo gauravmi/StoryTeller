@@ -22,14 +22,15 @@ defmodule StoryTeller.PageController do
   end
 
   def search(data, search) do
-
+    if not String.starts_with?(search, "#"), do: search = "#" <>search
+    Enum.filter(data, fn(x) -> String.contains? x["commit"]["message"], search end)
   end
 
-  def commits(conn, _params) do    
+  def commits(conn, params) do    
     responseJSON = Poison.Parser.parse!(GitHub.get("repos/gauravmi/StoryTeller/commits").body)
-    
+    actualCommits = search(responseJSON,params["q"])
     conn
        |> put_status(201)
-       |> json responseJSON
+       |> json actualCommits
   end
 end

@@ -43,6 +43,8 @@ class App {
 
   static display(data){
     var contributers = [];
+    this.searchSection.empty();
+    this.contributorSection.empty();
     for(var row of data){
       contributers.push(row.commit.author.name);
       var rowHtml = this.templateRow()(row);      

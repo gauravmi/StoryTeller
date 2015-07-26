@@ -33,6 +33,7 @@ body{
 	color: white;
 }
 .contrib-section{
+	color: #06F506;
 	margin-top: 10px;
 	padding: 25px;
 	line-height: 25px;
@@ -44,7 +45,7 @@ body{
 	opacity: .7;
 }
 .row{
-	color: white;
+	color: yellow;
 	display: inline-block;
 	width: 95%;
 	height: 60px;
@@ -52,5 +53,14 @@ body{
 	background-color: #333;	
 	margin: 10px 10px 5px 20px;
 	opacity: .7;
+	.commit{
+		color: white;
+	}
+	.author{
+		color: #06F506;
+	}
+	.date{
+		color: red;
+	}
 
 }

@@ -23,7 +23,7 @@ class App {
     return (function(gitLog){
       return $("<div class='row'> \
         <div class='message'>"+ gitLog.commit.message +"</div> \
-        <span class='commit'>"+ gitLog.sha.substring(0,8) +"</span> \
+        <a href="+gitLog.html_url+"><span class='commit'>"+ gitLog.sha.substring(0,8) +"</span> </a>\
         <span class='author'>"+ gitLog.commit.author.name +"</span> \
         <span class='date'>"+ gitLog.commit.author.date +"</span> \
         <span class='url'></span> \

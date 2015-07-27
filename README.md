@@ -7,17 +7,3 @@ To start your new Phoenix application:
 
 Now you can visit `localhost:4000` from your browser.
 
-
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> parent of 3f214e6... #9 Dummy commit
